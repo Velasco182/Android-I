@@ -42,10 +42,17 @@ class LoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
         val buttonOpenActivity = view.findViewById<Button>(R.id.inicioButton)
+        val buttonOpenRegisterActivity = view.findViewById<Button>(R.id.registroButton)
+
 
         buttonOpenActivity.setOnClickListener {
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
+        }
+
+        buttonOpenRegisterActivity.setOnClickListener {
+            val intent1 = Intent(activity, MainActivity::class.java)
+            startActivity(intent1)
         }
 
         return view

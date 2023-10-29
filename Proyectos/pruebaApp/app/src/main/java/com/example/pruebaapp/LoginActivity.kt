@@ -69,44 +69,44 @@ class LoginActivity : FragmentActivity() {
 
         })
 
-        val registroButton = findViewById<Button>(R.id.registroButton)
-        registroButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-
-        /*val inicioButton = findViewById<Button>(R.id.inicioButton)
-        inicioButton.setOnClickListener {
-            val intent1 = Intent(this, MainActivity::class.java)
-            startActivity(intent1)
-        }*/
-
+    /*val registroButton = findViewById<Button>(R.id.registroButton)
+    registroButton.setOnClickListener {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
-    override fun onBackPressed() {
-        if (viewPager.currentItem == 0) {
-            // If the user is currently looking at the first step, allow the system to handle
-            // the Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed()
-        } else {
-            // Otherwise, select the previous step.
-            viewPager.currentItem = viewPager.currentItem - 1
-        }
-    }
+    val inicioButton = findViewById<ButtonR.id.inicioButton)
+    inicioButton.setOnClickListener {
+        val intent1 = Intent(this, MainActivity::class.java)
+        startActivity(intent1)
+    }*/
 
-    /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
-     * sequence.
-     */
-    private inner class ScreenSlidePagerAdapter(fa: FragmentManager, li: Lifecycle) : FragmentStateAdapter(fa, li) {
-        override fun getItemCount(): Int {return NUM_PAGES}
+}
 
-        override fun createFragment(position: Int): Fragment {
-            return if (position == 0)
-                LoginFragment()
-            else
-                MenorLoginFragment()
-        }
-    }
+override fun onBackPressed() {
+if (viewPager.currentItem == 0) {
+    // If the user is currently looking at the first step, allow the system to handle
+    // the Back button. This calls finish() on this activity and pops the back stack.
+    super.onBackPressed()
+} else {
+    // Otherwise, select the previous step.
+    viewPager.currentItem = viewPager.currentItem - 1
+}
+}
+
+/**
+* A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+* sequence.
+*/
+private inner class ScreenSlidePagerAdapter(fa: FragmentManager, li: Lifecycle) : FragmentStateAdapter(fa, li) {
+override fun getItemCount(): Int {return NUM_PAGES}
+
+override fun createFragment(position: Int): Fragment {
+    return if (position == 0)
+        LoginFragment()
+    else
+        MenorLoginFragment()
+}
+}
 
 }
