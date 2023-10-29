@@ -18,14 +18,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Toast.makeText(this, "Hola Mundo", Toast.LENGTH_SHORT).show();
+
         findViewById<Button>(R.id.button_1).setOnClickListener{
 
-            //Toast.makeText(this, "Hola Mundo", Toast.LENGTH_SHORT).show();
-
-            var input = findViewById<TextInputEditText>(R.id.textInputEditText).text;
+            val input = findViewById<TextInputEditText>(R.id.textInputEditText).text;
             findViewById<TextView>(R.id.textView).setText(input);
 
-
+            Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
         }
     }
 
