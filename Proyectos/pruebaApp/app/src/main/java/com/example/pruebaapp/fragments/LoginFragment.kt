@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.example.pruebaapp.MainActivity
 import com.example.pruebaapp.R
+import com.example.pruebaapp.RegistroRContrasenaActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,7 +52,7 @@ class LoginFragment : Fragment() {
         }
 
         buttonOpenRegisterActivity.setOnClickListener {
-            val intent1 = Intent(activity, MainActivity::class.java)
+            val intent1 = Intent(activity, RegistroRContrasenaActivity::class.java)
             startActivity(intent1)
         }
 
