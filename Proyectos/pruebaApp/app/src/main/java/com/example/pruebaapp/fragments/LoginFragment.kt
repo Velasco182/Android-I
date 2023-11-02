@@ -1,20 +1,28 @@
 package com.example.pruebaapp.fragments
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.viewbinding.ViewBinding
 import com.example.pruebaapp.MainActivity
 import com.example.pruebaapp.R
 import com.example.pruebaapp.RegistroRContrasenaActivity
+import com.example.pruebaapp.data.SharedPreferencesManager
+import com.example.pruebaapp.databinding.FragmentLoginBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+///Binding: Primero modficar el bluid.gradle (Module:app) y dentro de android  al final buildFeatures {
+//        viewBinding true
+//    }
+//} private lateinit var binding: ResultProfileBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -22,17 +30,17 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    //Binding en fragments
+    private var _binding:FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+    ///sharedPreferences
+    private lateinit var sharedPre: SharedPreferencesManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    lateinit var  buttonOpenActivity : Button
+    /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,15 +48,39 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        /*by lazy {
+            DataBindingUtil.inflate(LayoutInflater, R.layout.fragment_login, )
+        }*/
 
-        val buttonOpenActivity = view.findViewById<Button>(R.id.inicioButton)
-        val buttonOpenRegisterActivity = view.findViewById<Button>(R.id.registroButton)
+        // ---> Para activities se usa así
+        sharedPre = SharedPreferencesManager(requireContext())
+        val userrrr = sharedPre.getUser()
+        val boolll = sharedPre.getBool()
 
+        Toast.makeText(activity, boolll.toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, userrrr, Toast.LENGTH_SHORT).show()
+
+
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        //val view = DataBindingUtil.inflate(R.layout.fragment_login, container, false)
+
+        val buttonOpenRegisterActivity = binding.registroButton
+
+        val user = binding.userInput
+        val pass = binding.passInput
+
+         buttonOpenActivity = binding.inicioButton
 
         buttonOpenActivity.setOnClickListener {
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
+            val u = user.text.toString()
+            val p = pass.text.toString()
+
+            // ---> Guardar datos del usuario con SharedPreferences para Activities
+            sharedPre.saveUser(u, p)
+            sharedPre.saveBool()
+
+            validar(u, p)
         }
 
         buttonOpenRegisterActivity.setOnClickListener {
@@ -56,7 +88,22 @@ class LoginFragment : Fragment() {
             startActivity(intent1)
         }
 
-        return view
+        return binding.root
+    }
+    fun validar(u: String, p: String) {
+
+        if (u == sharedPre.getUser() && p == sharedPre.getPass() ) {
+
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.putExtra("user", u)
+            startActivity(intent)
+
+        }else{
+
+            Toast.makeText(activity, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+
+        }
+
     }
 
 }
