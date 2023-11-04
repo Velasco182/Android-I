@@ -33,18 +33,43 @@ class MainActivity : AppCompatActivity() {
 
         Toast.makeText(this, "Hola Mundo", Toast.LENGTH_SHORT).show()
 
-        val valor = sharedPre.getUser()
+        //val valor = sharedPre.getUser()
         //intent.getBooleanExtra() Para pasar booleanos
 
-        val textView = binding.textView.setText(valor)
+        //val textView = binding.textView.setText(valor)
 
-        Toast.makeText(this, "Bienvenido " + valor, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Bienvenido ", Toast.LENGTH_SHORT).show();
 
         findViewById<Button>(R.id.button_1).setOnClickListener{
 
             //val input = findViewById<TextInputEditText>(R.id.textInputEditText).text;
 
         }
+        val bottomNavigationView = binding.navigationBar
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_item_inicio -> {
+                    // Lógica para la primera opción del menú
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.menu_item_Noticias -> {
+                    // Lógica para la segunda opción del menú
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.menu_item_Notificaciones -> {
+                    // Lógica para la segunda opción del menú
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.menu_item_Perfil -> {
+                    // Lógica para la segunda opción del menú
+                    return@setOnNavigationItemSelectedListener true
+                }
+                // Agregar más casos según sea necesario
+                else -> false
+            }
+        }
+
     }
 
 

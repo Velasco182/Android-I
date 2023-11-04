@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
+//import androidx.databinding.DataBindingUtil
 import androidx.viewbinding.ViewBinding
 import com.example.pruebaapp.MainActivity
 import com.example.pruebaapp.R
@@ -95,7 +95,7 @@ class LoginFragment : Fragment() {
         if (u == sharedPre.getUser() && p == sharedPre.getPass() ) {
 
             val intent = Intent(activity, MainActivity::class.java)
-            intent.putExtra("user", u)
+            //intent.putExtra("user", u)
             startActivity(intent)
 
         }else{

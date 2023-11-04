@@ -17,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
 
         sharedPref = SharedPreferencesManager(this)
 
+        ///Hacemos la vcalidacion boolean para inicio de sesion
         Handler().postDelayed({
             if (userLog()){
                 // Este código se ejecutará después de SPLASH_TIME_OUT
