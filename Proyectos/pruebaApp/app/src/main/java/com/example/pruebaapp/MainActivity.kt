@@ -71,8 +71,6 @@ class MainActivity : AppCompatActivity() {
         //val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
-        viewPager.isUserInputEnabled = true
-
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
 
             //currentItem = 0
