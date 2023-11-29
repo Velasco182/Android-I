@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val arrayAdapter : ArrayAdapter<*>
-        val personas = mutableListOf("Juan", "Carlos", "Daniel", "Diego", "Luis", "Manuel", "Chicken Little")
+        val personas = mutableListOf("Películas", "Series", "Documentales", "Futbol en vivo", "Luis", "Manuel", "Chicken Little")
         val lvDatos = findViewById<ListView>(R.id.lvDatos)
 
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, personas)

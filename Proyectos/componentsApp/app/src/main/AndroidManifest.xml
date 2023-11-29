@@ -25,4 +25,10 @@
         </activity>
     </application>
 
+    <!--Permisos para acceder a internet y además a la geolocalización del dispositivo por medio de la app-->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 </manifest>
