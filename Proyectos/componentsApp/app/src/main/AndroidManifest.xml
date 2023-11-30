@@ -23,6 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDpjcpfdYYFWosSk6MuVpDI7mLCPaQKbDo" />
+
     </application>
 
     <!--Permisos para acceder a internet y además a la geolocalización del dispositivo por medio de la app-->

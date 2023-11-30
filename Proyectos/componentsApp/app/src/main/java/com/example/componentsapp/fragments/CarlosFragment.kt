@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.example.componentsapp.R
@@ -24,6 +27,9 @@ class CarlosFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var webView: WebView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -39,41 +45,39 @@ class CarlosFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_carlos, container, false)
 
-        val spinner = view.findViewById<Spinner>(R.id.spinnerSeries)
+        webView = view.findViewById(R.id.webViewSeries)
 
-        // Obtener el array desde resources
-        val opcion = resources.getStringArray(R.array.genero)
+        // Habilita la ejecución de scripts en el WebView (opcional, según tus necesidades)
+        webView.settings.javaScriptEnabled = true
 
-        // Configurar el adapter para el Spinner
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, opcion)
+        // Configura un WebViewClient para manejar las interacciones dentro del WebView
+        webView.webViewClient = WebViewClient()
 
-        // Configurar el estilo del dropdown (opcional)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        // Configurar el adapter en el Spinner
-        spinner.adapter = adapter
+        // Configura un WebChromeClient para manejar eventos como la barra de progreso (opcional)
+        webView.webChromeClient = WebChromeClient()
 
         return view
 
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CarlosFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CarlosFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Carga una URL específica en el WebView
+        cargarContenidoSegunOpcion("Terror")
     }
+
+    // Método para cargar contenido en el WebView según la opción seleccionada
+    fun cargarContenidoSegunOpcion(opcionSeleccionada: String) {
+        // Puedes personalizar el contenido según la opción seleccionada
+        val contenidoHTML = when (opcionSeleccionada) {
+            "Terror" -> "<html><body><h1>Contenido para Terror</h1></body></html>"
+            "Drama" -> "<html><body><h1>Contenido para Drama</h1></body></html>"
+            "Triller" -> "<html><body><h1>Contenido para Thriller</h1></body></html>"
+            // Agrega más casos según sea necesario
+            else -> "<html><body><h1>Contenido por defecto</h1></body></html>"
+        }
+
+        webView.loadData(contenidoHTML, "text/html", "UTF-8")
+    }
+
 }
