@@ -49,6 +49,7 @@ class DanielFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         if (map != null) {
             googleMap = map
+
             // Mover la cámara a una ubicación específica (por ejemplo, latitud y longitud)
             val location = LatLng(37.09024, -95.712891)
             googleMap.addMarker(MarkerOptions().position(location).title("Robert Downey Sr. (2022)"))

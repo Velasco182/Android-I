@@ -1,20 +1,15 @@
 package com.example.pruebaapp.fragments
 
+//import androidx.databinding.DataBindingUtil
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-//import androidx.databinding.DataBindingUtil
-import androidx.viewbinding.ViewBinding
+import androidx.fragment.app.Fragment
 import com.example.pruebaapp.MainActivity
-import com.example.pruebaapp.R
 import com.example.pruebaapp.RegistroRContrasenaActivity
 import com.example.pruebaapp.data.SharedPreferencesManager
 import com.example.pruebaapp.databinding.FragmentLoginBinding
