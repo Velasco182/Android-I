@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="viewPagerAncho1">match_parent</item>
+    <item type="dimen" name="viewPagerAlto1">200dp</item>
+
+    <item type="dimen" name="viewPagerAncho2">wrap_content</item>
+    <item type="dimen" name="viewPagerAlto2">300dp</item>
+</resources>

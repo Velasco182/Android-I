@@ -19,11 +19,6 @@ import com.example.pruebaapp.databinding.FragmentLoginBinding
 //    }
 //} private lateinit var binding: ResultProfileBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LoginFragment : Fragment() {
     //Binding en fragments
     private var _binding:FragmentLoginBinding? = null

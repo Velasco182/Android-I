@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/loginLogo" />-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/indicador"
@@ -44,9 +44,9 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/loginLogo"
         app:tabIndicatorAnimationMode="elastic"
-        app:tabIndicatorColor="@null"
+        app:tabIndicatorColor="@color/uva"
         app:tabIndicatorGravity="stretch"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/naranja">
@@ -57,13 +57,13 @@
             android:id="@+id/inicioTab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="                         Tutor                         " />
+            android:text="                    Iniciar Sesión                   " />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/seguirRutaTab"
+            android:id="@+id/registroTab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="                         Menor                         " />
+            android:text="                      Regístrate                     " />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -81,10 +81,10 @@
             android:id="@+id/loginViewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/indicador"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp" />
+            android:layout_marginBottom="32dp"
+            android:background="@color/uva" />
 
     </ScrollView>
 
