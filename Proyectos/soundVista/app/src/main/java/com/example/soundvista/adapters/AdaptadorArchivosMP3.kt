@@ -8,20 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.soundvista.R
 import com.example.soundvista.data.archivoMP3
 
-class AdaptadorArchivosMP3(private val archivosMP3: List<archivoMP3>,
-                           private val onArchivoClickListener: (filePath: String, position: Int) -> Unit
+class AdaptadorArchivosMP3(var archivosMP3: List<archivoMP3>,
+                           private val onArchivoClickListener: (archivoMP3: archivoMP3) -> Unit
 ) : RecyclerView.Adapter<AdaptadorArchivosMP3.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        init {
-            itemView.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val archivo = archivosMP3[position]
-                    onArchivoClickListener.invoke(archivo.filePath, position)
-                }
-            }
-        }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+
+    fun actualizarArchivos(nuevaLista: List<archivoMP3>) {
+        archivosMP3 = nuevaLista
+        notifyDataSetChanged()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,6 +30,10 @@ class AdaptadorArchivosMP3(private val archivosMP3: List<archivoMP3>,
         val nombreArchivo: TextView = holder.itemView.findViewById(R.id.nombreArchivo)
         val archivoMP3 = archivosMP3[position]
         nombreArchivo.text = archivoMP3.nombre
+
+        holder.itemView.setOnClickListener{
+            onArchivoClickListener.invoke(archivoMP3)
+        }
     }
 
     override fun getItemCount(): Int {

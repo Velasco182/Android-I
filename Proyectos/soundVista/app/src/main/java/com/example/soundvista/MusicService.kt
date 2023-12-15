@@ -31,14 +31,20 @@ class MusicService : Service() {
         fun getService(): MusicService = this@MusicService
     }
 
-    override fun onBind(intent: Intent?): IBinder? {
+    override fun onBind(intent: Intent?): IBinder {
+        actualizarArchivos()
         return binder
     }
 
     override fun onCreate() {
         super.onCreate()
+        actualizarArchivos()
+    }
+
+    fun actualizarArchivos() {
         archivosMP3 = obtenerArchivosMultimedia()
     }
+
 
     fun playMusic(filePath: String, position: Int) {
         stopMusic()
@@ -49,6 +55,7 @@ class MusicService : Service() {
             start()
             setOnCompletionListener {
                 // Aquí puedes manejar la lógica cuando una canción termina de reproducirse
+                actualizarArchivos()
             }
         }
 
@@ -76,7 +83,7 @@ class MusicService : Service() {
         notificationManager.notify(notificationId, notification)
     }
 
-    private fun obtenerArchivosMultimedia(): List<archivoMP3> {
+    fun obtenerArchivosMultimedia(): List<archivoMP3> {
         // Implementa la lógica para obtener la lista de archivos multimedia
         // Puedes usar el código que usaste para cargar un solo archivo y adaptarlo para cargar múltiples
         val directorioMusica = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)

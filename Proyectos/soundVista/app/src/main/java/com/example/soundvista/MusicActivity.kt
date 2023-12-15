@@ -48,23 +48,35 @@ class MusicActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        archivoAdapter = AdaptadorArchivosMP3(emptyList()) { filePath: String, position: Int ->
-            playMusic(filePath, position)
+        archivoAdapter = AdaptadorArchivosMP3(emptyList()) { archivoMP3: archivoMP3 ->
+            playMusic(archivoMP3)
         }
         
         recyclerView.adapter = archivoAdapter
 
         solicitarPermisos()
-
+        obtenerYMostrarArchivos()
         // Llama a bindMusicService después de solicitar los permisos
         bindMusicService()
 
         //val serviceIntent = Intent(this, MusicService::class.java)
         //bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE)
-        obtenerArchivosMultimedia()
+        //val archivos = obtenerYMostrarArchivos()
+        //archivoAdapter.actualizarArchivos(archivos)
     }
 
-    /*private fun obtenerArchivosMultimedia(): List<archivoMP3> {
+    override fun onResume() {
+        super.onResume()
+        bindMusicService()
+        //obtenerYMostrarArchivos()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unbindMusicService()
+    }
+
+    /*private fun obtenerYMostrarArchivos(): List<archivoMP3> {
         // Aquí debes implementar la lógica para obtener la lista de archivos multimedia
         // Puedes usar el código que usaste para cargar un solo archivo y adaptarlo para cargar múltiples
         // Asegúrate de tener los permisos necesarios y de manejar los casos donde no se pueden cargar los archivos
@@ -88,37 +100,6 @@ class MusicActivity : AppCompatActivity() {
         return archivosMP3
     }*/
 
-    private fun obtenerArchivosMultimedia(): List<archivoMP3> {
-        val archivosMP3 = mutableListOf<archivoMP3>()
-
-        val directorioMusica = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
-
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_MEDIA_AUDIO
-            ) == PackageManager.PERMISSION_GRANTED && directorioMusica.exists() && directorioMusica.isDirectory
-        ) {
-            val archivos = directorioMusica.listFiles()
-
-            archivos?.let {
-                for (archivo in archivos) {
-                    if (archivo.isFile && archivo.name.endsWith(".mp3", true)) {
-                        archivosMP3.add(archivoMP3(archivo.name, archivo.absolutePath))
-                    }
-                }
-            }
-        }
-
-        // Actualiza los datos del adaptador con la nueva lista de archivos
-        return archivoAdapter.actualizarArchivos(archivosMP3)
-    }
-
-    fun actualizarArchivos(nuevaLista: List<archivoMP3>) {
-        archivosMP3 = nuevaLista
-        notifyDataSetChanged()
-    }
-
-
 
     // Verificar y solicitar permisos en tiempo de ejecución
     private fun solicitarPermisos() {
@@ -133,8 +114,15 @@ class MusicActivity : AppCompatActivity() {
                 REQUEST_PERMISSION
             )
         } else {
-            bindMusicService()
-            obtenerArchivosMultimedia() // Llama a la función para cargar archivos si ya tienes el permiso
+            //bindMusicService()
+            obtenerYMostrarArchivos() // Llama a la función para cargar archivos si ya tienes el permiso
+        }
+    }
+
+    private fun obtenerYMostrarArchivos() {
+        val archivos = musicService?.obtenerArchivosMultimedia()
+        archivos?.let {
+            archivoAdapter.actualizarArchivos(archivos)
         }
     }
 
@@ -150,9 +138,10 @@ class MusicActivity : AppCompatActivity() {
         }
     }
 
-    private fun playMusic(filePath: String, position: Int) {
+    private fun playMusic(archivoMP3: archivoMP3) {
         if (isServiceBound) {
-            musicService?.playMusic(filePath, position)
+
+            musicService?.playMusic(archivoMP3.filePath, archivoAdapter.archivosMP3.indexOf(archivoMP3))
             // Aquí puedes actualizar tu interfaz de usuario con la información de la canción actual
             // Puedes usar musicService.getCurrentSongInfo() para obtener la información
         } else {
@@ -169,7 +158,7 @@ class MusicActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_PERMISSION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                obtenerArchivosMultimedia() // Llama a la función para cargar archivos si el permiso fue concedido
+                obtenerYMostrarArchivos() // Llama a la función para cargar archivos si el permiso fue concedido
             } else {
                 // Manejar el caso en el que el usuario no concede el permiso
                 Toast.makeText(this, "Permiso denegado", Toast.LENGTH_SHORT).show()
