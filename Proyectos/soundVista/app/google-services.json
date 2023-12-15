@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1041462260231",
+    "project_id": "soundvista-c3f1b",
+    "storage_bucket": "soundvista-c3f1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041462260231:android:de0a4dded8bb3edd3770a2",
+        "android_client_info": {
+          "package_name": "com.example.soundvista"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs94UIyqtotPEYwNEGpc1fNQopQ7aIxcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -18,7 +18,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-
+enum class ProviderType {
+    BASICO
+}
 class MusicActivity : AppCompatActivity() {
 
     // En tu actividad o fragmento
@@ -28,6 +30,21 @@ class MusicActivity : AppCompatActivity() {
 
     private var musicService: MusicService? = null
     private var isServiceBound = false
+
+
+    //
+
+    val bundle: Bundle? = intent.extras
+    val correoInput: String? = bundle?.getString( "correo")
+
+
+
+    private fun setup( correoInput:String, providerType: String){
+
+        correoInput.text = email
+        providerType.text = provider
+
+    }
 
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -110,13 +127,9 @@ class MusicActivity : AppCompatActivity() {
         }
 
         // Actualiza los datos del adaptador con la nueva lista de archivos
-        return archivoAdapter.actualizarArchivos(archivosMP3)
+        return archivosMP3
     }
 
-    fun actualizarArchivos(nuevaLista: List<archivoMP3>) {
-        archivosMP3 = nuevaLista
-        notifyDataSetChanged()
-    }
 
 
 
